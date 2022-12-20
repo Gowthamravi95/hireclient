@@ -14,7 +14,7 @@ function App() {
 
   useEffect(()=>{
     const getUsers =async(req,res)=>{
-      await axios.get("https://hire-server.onrender.com/")
+      await axios.get("https://hire-server.onrender.com")
       .then((res)=>setUsers(res.data))
       
     }
