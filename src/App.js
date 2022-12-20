@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Home from './component/pages/Home';
+import 'bootstrap/dist/css/bootstrap.css';
+import React,{useEffect, useState,createContext} from 'react';
+import axios from "axios"
+import Client from './component/pages/Client';
+
+
+export const  AppContext=createContext();
 
 function App() {
+  const [users,setUsers] =useState([])
+  const [isLoggedIn,setIsLoggedIn] =useState(0)
+
+  useEffect(()=>{
+    const getUsers =async(req,res)=>{
+      await axios.get("http://localhost:2500/")
+      .then((res)=>setUsers(res.data))
+      
+    }
+    getUsers();
+  },[])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{
+      users,
+      isLoggedIn,
+      setIsLoggedIn
+    }}>
+       {isLoggedIn ? <Client/> : <Home/>}
+    </AppContext.Provider>
+     
+
+                  
   );
 }
 
