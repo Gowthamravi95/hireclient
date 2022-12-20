@@ -16,7 +16,7 @@ e.preventDefault()
 const postUser =async(newUser)=>{
   
   try{
-    await axios.post('http://localhost:2500/user',newUser)
+    await axios.post('https://hire-server.onrender.com/user',newUser)
     .then(window.alert("registeration success please login to continue"))
   }
   catch(err){
